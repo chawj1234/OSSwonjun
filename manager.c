@@ -36,14 +36,17 @@ int selectDataNo(Product *p, int count){
 
 //배열데이터를 파일에 저장하는 함수
 void saveData(Product p[], int count){
-	FILE* fp;
+FILE* fp;
 
-	//중량 가격 제품명
-	fp= fopen("product.txt","wt");
-	
-	
-	fclose(fp);
-	printf("저장됨!\n");
+    fp= fopen("product.txt","wt");
+
+    for(int i = 0; i< count; i++){
+        if(p[i].weight == -1 || p[i].price == -1) continue;
+        fprintf(fp, "%d %d %s", p[i].weight, p[i].price, p[i].name);
+    }
+    fclose(fp);
+    printf("==> 저장됨 \n");
+
 }
 
 
