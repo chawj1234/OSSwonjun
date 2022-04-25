@@ -52,14 +52,20 @@ FILE* fp;
 
 //파일에서 데이터 불러오는 함수
 int loadData(Product *p){
-	int count=0;
-	FILE*fp;
+int count=0;
+    FILE *fp;
+    fp = fopen("product.txt","rt");
+    if(fp==NULL){
+        printf("=>파일 없음\n");
+        return 0;
+    }
+    for(;;count++){
+        if(feof(fp)) break; 
+        fscanf(fp,"%d %d %[^\n]s", &p[count].weight, &p[count].price, p[count].name);
 
-	//파일 내용을 읽어와서 배열에 값 추가하기
+    }
+	   printf("=> 로딩 성공!\n");
+    fclose(fp);
+    return count;
 
-
-
-
-	printf("=> 로딩 성공!\n");
-	return count;
 }
